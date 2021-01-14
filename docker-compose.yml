@@ -1,0 +1,65 @@
+version: "3"
+
+services:
+  db:
+    container_name: vintage_db
+    image: postgres:12-alpine
+    environment:
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+      POSTGRES_DB: ${PG_NAME}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    env_file:
+      - ./.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/postgres/pgdata:/var/lib/postgresql/data/pgdata
+    networks:
+      - vintage-network
+
+  frontend:
+    container_name: vintage_web_front
+    build: ./frontend/
+    command: "npm run serve"
+    volumes:
+      - ./frontend:/frontend/
+      - ./frontend/node_modules:/frontend/node_modules
+    ports:
+      - "8080:8080"
+    networks:
+      - vintage-network
+
+  web:
+    container_name: vintage_web_api
+    build: ./backend
+    volumes:
+      - ./backend:/code
+      - ./static-root:/static-root
+      - ./media-root:/media-root
+      - ./frontend:/frontend
+    command: bash -c "python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+      - mailhog
+      - frontend
+    networks:
+      - vintage-network
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 1025:1025 # smtp server
+      - 8025:8025 # web ui. Visit http://localhost:8025/ to check emails
+    networks:
+      - vintage-network
+
+networks:
+  vintage-network:
+
+volumes:
+  postgres_data:
