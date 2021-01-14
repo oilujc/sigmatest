@@ -65,25 +65,25 @@ The application will be avaible on _PORT 8000_ and 8080_ by default, but it's co
 ## Running makemigrations
 
 ```shell
-docker exec -ti vintage_web python /code/manage.py makemigrations
+docker exec -ti vintage_web_api python /code/manage.py makemigrations
 ```
 
 ## Running empty makemigrations
 
 ```shell
-docker exec -ti vintage_web python /code/manage.py makemigrations app_name --empty
+docker exec -ti vintage_web_api python /code/manage.py makemigrations app_name --empty
 ```
 
 ## Running the migrations
 
 ```shell
-docker exec -ti vintage_web python /code/manage.py migrate
+docker exec -ti vintage_web_api python /code/manage.py migrate
 ```
 
 ## Create super user
 
 ```shell
-docker exec -ti vintage_web python /code/manage.py createsuperuser
+docker exec -ti vintage_web_api python /code/manage.py createsuperuser
 
 ```
 
