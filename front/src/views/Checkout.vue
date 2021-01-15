@@ -21,7 +21,7 @@
                   >
                     <span class="text-red-dark">Total producto:</span>
                     <span class="text-red-dark price"
-                      >${{ formatPrice(product.price + product.tax) }}</span
+                      >${{ formatPrice(getTotal()) }}</span
                     >
                   </div>
                   <div class="divider"></div>
@@ -31,24 +31,32 @@
                       <span class="text-red-dark price"
                         >${{ formatPrice(product.price) }}</span
                       >
-                      <span class="text-red-dark"
+                      <span class="text-red-dark" v-if="product.public_id !== 2"
                         >+${{ formatPrice(product.tax) }}</span
                       >
                       <span
                         class="text-red-dark discount"
                         v-if="product.discount_rate !== 0"
-                        >-{{ product.discount_rate*100 }}% de descuento</span
+                        >-{{ product.discount_rate * 100 }}% de descuento</span
                       >
                     </div>
                   </div>
                   <div class="divider"></div>
-                  <div class="d-flex justify-content-between align-items-center mb-5">
+                  <div
+                    class="d-flex justify-content-between align-items-center mb-5"
+                  >
                     <span class="text-red-dark">Total de la compra:</span>
-                    <span class="text-red-dark price">${{ formatPrice(product.total) }}</span>
+                    <span class="text-red-dark price"
+                      >${{ formatPrice(product.total) }}</span
+                    >
                   </div>
 
                   <div class="">
-                    <FormulateForm name="checkout" v-model="order" @submit="handleSubmit">
+                    <FormulateForm
+                      name="checkout"
+                      v-model="order"
+                      @submit="handleSubmit"
+                    >
                       <div class="row">
                         <div class="col-md-6">
                           <FormulateInput
@@ -79,7 +87,9 @@
                         <FormulateInput
                           type="submit"
                           label="Finalizar compra"
-                          :input-class="(context, classes) => ['btn', 'btn-primary']"
+                          :input-class="
+                            (context, classes) => ['btn', 'btn-primary']
+                          "
                         />
                       </div>
                     </FormulateForm>
@@ -111,8 +121,6 @@ export default {
   },
   computed: {
     product() {
-      // We will see what `params` is shortly
-      console.log(this.$store.state.count);
       return this.$store.state.product;
     },
   },
@@ -122,19 +130,19 @@ export default {
     },
     handleSubmit(data) {
       data["product"] = this.product;
-
-      console.log(data);
-      axios
-        .post("http://localhost:8000/orders/", { ...data })
-        .then((response) => {
-          console.log(response.data);
-          alert('Compra realizada satisfactoriamente');
-          this.$formulate.reset('checkout')
+      axios.post("http://localhost:8000/orders/", { ...data }).then(() => {
+        alert("Compra realizada satisfactoriamente");
+        this.$formulate.reset("checkout");
       });
     },
     formatPrice(value) {
       let val = (value / 1).toFixed(2).replace(".", ",");
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    },
+    getTotal() {
+      return this.product.public_id !== 2
+        ? this.product.price + this.product.tax
+        : this.product.price;
     },
   },
 };

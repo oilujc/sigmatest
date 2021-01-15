@@ -14,7 +14,7 @@
     │   |   └── ...
     │   ├── manage.py  
     │   └── Dockerfile   
-    ├── frontend
+    ├── front
     │   ├── node_modules
     │   |   └── ...
     │   ├── public

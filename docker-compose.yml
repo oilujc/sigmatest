@@ -18,17 +18,17 @@ services:
     networks:
       - vintage-network
 
-  # frontend:
-  #   container_name: vintage_web_front
-  #   build: ./frontend/
-  #   command: "npm run serve"
-  #   volumes:
-  #     - ./frontend:/frontend/
-  #     - ./frontend/node_modules:/frontend/node_modules
-  #   ports:
-  #     - "8080:8080"
-  #   networks:
-  #     - vintage-network
+  frontend:
+    container_name: vintage_web_front
+    build: ./front/
+    command: "npm run serve"
+    volumes:
+      - ./front:/front/
+      - ./front/node_modules:/front/node_modules
+    ports:
+      - "8080:8080"
+    networks:
+      - vintage-network
 
   web:
     container_name: vintage_web_api

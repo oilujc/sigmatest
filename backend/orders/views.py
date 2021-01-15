@@ -70,10 +70,7 @@ class OrderViewset(viewsets.ModelViewSet):
 			return Response({'product': ['Este campo es requerido.']}, status=status.HTTP_400_BAD_REQUEST)
 
 		tax, discount, discount_rate, total = validateProductId(product)
-
-		print(total, tax, discount, product.price, product.public_id,
-			  datetime.datetime.now().hour, timezone.now())
-
+		
 		serializer = self.get_serializer(data=request.data)
 		serializer.is_valid(raise_exception=True)
 		serializer.save(product=product, total=total)

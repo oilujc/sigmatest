@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-      <router-view />
+    <router-view />
 
-  <div class="container pb-4">
-    <div class="row justify-content-center">
-      <div class="col-lg-2">
-      <img src="@/assets/logo.png" width="150px" height="100px" alt="">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-2">
+          <img src="@/assets/logo.png" width="150px" height="100px" alt="" />
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -20,7 +20,7 @@
 }
 
 .page {
-  padding-top: 10rem;
+  padding: 10rem 0 0 0;
   background-color: #fdf1e2;
   background-position: top; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
@@ -41,7 +41,7 @@ ul li {
 
 .card {
   border: none !important;
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
 }
 
 .card .card-body h1 {
@@ -51,7 +51,8 @@ ul li {
   font-weight: 600;
 }
 
-.card .card-body h3, .card .card-body span.price {
+.card .card-body h3,
+.card .card-body span.price {
   color: #63484e;
   font-size: 1.5rem;
   font-weight: 400;
@@ -63,7 +64,7 @@ ul li {
 
 .card .card-body span.tax {
   color: #bbb8b8;
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 .card .card-body span.discount {
@@ -73,25 +74,26 @@ ul li {
 }
 
 .card .card-body div.divider {
-  margin-top: .3rem;
-  margin-bottom: .8rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.8rem;
   border: 0;
   border-top: 2px solid #7d5050;
 }
 .card .card-body p.text-red {
   color: #7d5050;
-  font-size: .9rem;
+  font-size: 0.9rem;
   font-weight: 500;
 }
-.card .card-body .text-red-dark, form label {
+.card .card-body .text-red-dark,
+form label {
   color: #5f4043;
-  font-size: .9rem;
+  font-size: 0.9rem;
   font-weight: 500;
 }
 
 .card .card-body p.card-text {
   color: #af9993;
-  font-size: .9rem;
+  font-size: 0.9rem;
   font-weight: 500;
 }
 
@@ -103,6 +105,5 @@ ul li {
 form .form-control {
   border-color: #7d5050;
 }
-
 
 </style>

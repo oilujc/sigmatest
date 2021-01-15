@@ -59,7 +59,6 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     axios.get("http://localhost:8000/orders/product/").then((response) => {
-      console.log(response.data);
       next((vm) => vm.setData(response.data));
     });
   },
