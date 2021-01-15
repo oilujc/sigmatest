@@ -53,7 +53,7 @@ INSTALLED_APPS += THIRD_APPS
 
 
 CORS_ALLOWED_ORIGINS = os.environ.get(
-    "CORS_ALLOWED_ORIGINS", 'http://127.0.0.1:8000').split(" ")
+    "CORS_ALLOWED_ORIGINS", 'http://localhost:8080').split(" ")
 
 # REST_FRAMEWORK = {
 #     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
@@ -131,7 +131,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'es-MX'
+LANGUAGE_CODE = 'es-VE'
 
 TIME_ZONE = 'UTC'
 

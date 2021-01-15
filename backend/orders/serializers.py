@@ -9,6 +9,9 @@ from utils.mailer import Mailer
 from .validators import HasNumbers
 
 class ProductSerializer(ModelSerializer):
+	discount = SerializerMethodField()
+	discount_rate = SerializerMethodField()
+	total = SerializerMethodField()
 	class Meta:
 		model = Product
 		fields = [
@@ -17,7 +20,21 @@ class ProductSerializer(ModelSerializer):
 			'image',
 			'price',
 			'tax',
+			'discount',
+			'discount_rate',
+			'total'
 		]
+
+		read_only_fields = ['discount', 'discount_rate', 'total']
+
+	def get_discount(self, obj):
+		return self.context.get("discount", 0)
+
+	def get_discount_rate(self, obj):
+		return self.context.get("discount_rate", 0)
+
+	def get_total(self, obj):
+		return self.context.get("total", 0)
 
 
 class OrderSerializer(ModelSerializer):
@@ -44,7 +61,7 @@ class OrderSerializer(ModelSerializer):
 
 		Mailer().sender(subject=f'Nueva orden: {order.pk}',
 				template_name='order_success',
-				context=validate_data,
+				context={**validate_data, "created_at": order.created_at},
 				to=[order.email])
 
 		return order

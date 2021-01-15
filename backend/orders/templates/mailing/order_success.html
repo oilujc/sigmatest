@@ -1,1 +1,12 @@
-{% autoescape off %} Hi {{ first_name }} {{last_name}} {% endautoescape %}
+{% autoescape off %} 
+
+Nombre: {{ first_name }} {{last_name}} <br>
+Email: {{email}}<br>
+Fecha: {{created_at}}<br>
+
+-------------------------------------------------<br>
+Nombre del producto: {{product.name}}<br>
+Total Producto: {{product.price}}<br>
+Total compra: {{total}}<br>
+
+{% endautoescape %}

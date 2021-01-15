@@ -18,17 +18,17 @@ services:
     networks:
       - vintage-network
 
-  frontend:
-    container_name: vintage_web_front
-    build: ./frontend/
-    command: "npm run serve"
-    volumes:
-      - ./frontend:/frontend/
-      - ./frontend/node_modules:/frontend/node_modules
-    ports:
-      - "8080:8080"
-    networks:
-      - vintage-network
+  # frontend:
+  #   container_name: vintage_web_front
+  #   build: ./frontend/
+  #   command: "npm run serve"
+  #   volumes:
+  #     - ./frontend:/frontend/
+  #     - ./frontend/node_modules:/frontend/node_modules
+  #   ports:
+  #     - "8080:8080"
+  #   networks:
+  #     - vintage-network
 
   web:
     container_name: vintage_web_api
@@ -37,7 +37,6 @@ services:
       - ./backend:/code
       - ./static-root:/static-root
       - ./media-root:/media-root
-      - ./frontend:/frontend
     command: bash -c "python manage.py runserver 0.0.0.0:8000"
     ports:
       - "8000:8000"
@@ -46,7 +45,7 @@ services:
     depends_on:
       - db
       - mailhog
-      - frontend
+      # - frontend
     networks:
       - vintage-network
 

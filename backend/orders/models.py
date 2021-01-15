@@ -14,7 +14,7 @@ class Product(models.Model):
 		verbose_name_plural = 'Products'
 
 	def __str__(self):
-		return f'{self.name}'
+		return f'({self.public_id}) {self.name}'
 
 class Order(models.Model):
 
